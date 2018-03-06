@@ -30,14 +30,24 @@ Include in application
 
 hash is return from: `Passwords::hash($password)`
 
+`Identity\Authenticator\Drivers\CombineDriver` automatic use `autowired: self` other by configure
+
 neon configure:
 ```neon
-#   driver: Identity\Authenticator\Drivers\ArrayDriver()
+identityAuthenticator:
+#   autowired: true
+#   driver: Identity\Authenticator\Drivers\ArrayDriver([])
 #   driver: Identity\Authenticator\Drivers\NeonDriver(%appDir%/authenticator.neon)
     driver: Identity\Authenticator\Drivers\DibiDriver(%tablePrefix%)
 #   driver: Identity\Authenticator\Drivers\CombineDriver([
 #       Identity\Authenticator\Drivers\DibiDriver(%tablePrefix%),
 #       Identity\Authenticator\Drivers\NeonDriver(%appDir%/authenticator.neon)
 #       Identity\Authenticator\Drivers\ArrayDriver([])
-#       ])
+#   ])
+```
+
+neon configure extension:
+```neon
+extensions:
+    identityAuthenticator: Identity\Authenticator\Drivers\Extension
 ```
