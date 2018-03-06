@@ -34,6 +34,7 @@ hash is return from: `Passwords::hash($password)`
 
 neon configure:
 ```neon
+#identity authenticator
 identityAuthenticator:
 #   autowired: true
 #   driver: Identity\Authenticator\Drivers\ArrayDriver([])
