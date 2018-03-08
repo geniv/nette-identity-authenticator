@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Identity\Authenticator\Drivers;
+namespace Identity\Authenticator\Bridges\Nette;
 
+use Identity\Authenticator\Drivers\CombineDriver;
 use Nette\DI\CompilerExtension;
 
 
@@ -9,7 +10,7 @@ use Nette\DI\CompilerExtension;
  * Class Extension
  *
  * @author  geniv
- * @package Identity\Authenticator\Drivers
+ * @package Identity\Authenticator\Bridges\Nette
  */
 class Extension extends CompilerExtension
 {

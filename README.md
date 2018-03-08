@@ -50,5 +50,5 @@ identityAuthenticator:
 neon configure extension:
 ```neon
 extensions:
-    identityAuthenticator: Identity\Authenticator\Drivers\Extension
+    identityAuthenticator: Identity\Authenticator\Bridges\Nette\Extension
 ```
