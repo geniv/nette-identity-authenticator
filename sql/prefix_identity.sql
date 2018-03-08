@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: localhost:3306
--- Vytvořeno: Sob 27. led 2018, 20:40
+-- Vytvořeno: Čtv 08. bře 2018, 14:15
 -- Verze serveru: 10.1.26-MariaDB-0+deb9u1
 -- Verze PHP: 7.0.27-0+deb9u1
 
@@ -47,7 +47,7 @@ CREATE TABLE `prefix_identity` (
 ALTER TABLE `prefix_identity`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `login_UNIQUE` (`login`),
-  ADD KEY `fk_identity_acl_role_idx` (`role`);
+  ADD UNIQUE KEY `email_UNIQUE` (`email`);
 
 --
 -- AUTO_INCREMENT pro tabulky
@@ -58,16 +58,6 @@ ALTER TABLE `prefix_identity`
 --
 ALTER TABLE `prefix_identity`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- Omezení pro exportované tabulky
---
-
---
--- Omezení pro tabulku `prefix_identity`
---
-ALTER TABLE `prefix_identity`
-  ADD CONSTRAINT `fk_identity_acl_role` FOREIGN KEY (`role`) REFERENCES `prefix_acl_role` (`role`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
