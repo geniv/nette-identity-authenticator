@@ -2,9 +2,6 @@
 
 namespace Identity\Authenticator\Drivers;
 
-use Identity\Authenticator\Drivers\CombineDriver;
-use Identity\Login\FormContainer;
-use Identity\Login\LoginForm;
 use Nette\DI\CompilerExtension;
 
 
