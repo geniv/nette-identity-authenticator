@@ -4,6 +4,7 @@ namespace Identity\Authenticator\Drivers;
 
 use Dibi\Connection;
 use Dibi\Fluent;
+use Nette\Localization\ITranslator;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
 use Nette\Security\IIdentity;
@@ -28,6 +29,8 @@ class DibiDriver implements IAuthenticator
 
     /** @var Connection */
     private $connection;
+    /** @var ITranslator */
+    private $translator;
     /** @var string */
     private $tableIdentity;
     /** @var array */
@@ -37,12 +40,14 @@ class DibiDriver implements IAuthenticator
     /**
      * DibiDriver constructor.
      *
-     * @param string     $tablePrefix
-     * @param Connection $connection
+     * @param string           $tablePrefix
+     * @param Connection       $connection
+     * @param ITranslator|null $translator
      */
-    public function __construct(string $tablePrefix, Connection $connection)
+    public function __construct(string $tablePrefix, Connection $connection, ITranslator $translator = null)
     {
         $this->connection = $connection;
+        $this->translator = $translator;
         // define table names
         $this->tableIdentity = $tablePrefix . self::TABLE_NAME;
     }
@@ -160,13 +165,13 @@ class DibiDriver implements IAuthenticator
 
                     return new Identity($result['id'], $result['role'], $arr);
                 } else {
-                    throw new AuthenticationException('Not active account.', self::NOT_APPROVED);
+                    throw new AuthenticationException($this->translator->translate('dibi-driver-not-approved'), self::NOT_APPROVED);
                 }
             } else {
-                throw new AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
+                throw new AuthenticationException($this->translator->translate('dibi-driver-invalid-credential'), self::INVALID_CREDENTIAL);
             }
         } else {
-            throw new AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
+            throw new AuthenticationException($this->translator->translate('dibi-driver-identity-not-found'), self::IDENTITY_NOT_FOUND);
         }
     }
 }
