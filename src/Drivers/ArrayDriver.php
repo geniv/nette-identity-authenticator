@@ -2,6 +2,7 @@
 
 namespace Identity\Authenticator\Drivers;
 
+use Nette\Localization\ITranslator;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
 use Nette\Security\Identity;
@@ -19,16 +20,20 @@ class ArrayDriver implements IAuthenticator
 {
     /** @var array */
     private $userList;
+    /** @var ITranslator */
+    private $translator;
 
 
     /**
      * ArrayDriver constructor.
      *
-     * @param array $userList
+     * @param array            $userList
+     * @param ITranslator|null $translator
      */
-    public function __construct(array $userList)
+    public function __construct(array $userList, ITranslator $translator = null)
     {
         $this->userList = $userList;
+        $this->translator = $translator;
     }
 
 
@@ -51,10 +56,10 @@ class ArrayDriver implements IAuthenticator
 
                 return new Identity($result['id'], (isset($result['role']) ? $result['role'] : null), $result);
             } else {
-                throw new AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
+                throw new AuthenticationException($this->translator->translate('array-driver-invalid-credential'), self::INVALID_CREDENTIAL);
             }
         } else {
-            throw new AuthenticationException('The credentials is incorrect.', self::IDENTITY_NOT_FOUND);
+            throw new AuthenticationException($this->translator->translate('array-driver-identity-not-found'), self::IDENTITY_NOT_FOUND);
         }
     }
 }

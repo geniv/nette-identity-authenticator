@@ -1,0 +1,6 @@
+dibi-driver-not-approved: "Not active account."
+dibi-driver-invalid-credential: "The password is incorrect."
+dibi-driver-identity-not-found: "The username is incorrect."
+
+array-driver-invalid-credential: "The password is incorrect."
+array-driver-identity-not-found: "The credentials is incorrect."
