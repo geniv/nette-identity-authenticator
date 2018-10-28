@@ -3,7 +3,7 @@
 namespace Identity\Authenticator\Drivers;
 
 use Dibi\Connection;
-use Dibi\Fluent;
+use Dibi\IDataSource;
 use Nette\Localization\ITranslator;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
@@ -81,9 +81,9 @@ class DibiDriver implements IAuthenticator
     /**
      * Get list.
      *
-     * @return Fluent
+     * @return IDataSource
      */
-    public function getList(): Fluent
+    public function getList(): IDataSource
     {
         return $this->connection->select($this->columns)
             ->from($this->tableIdentity);
