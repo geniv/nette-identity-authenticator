@@ -31,7 +31,7 @@ class Extension extends CompilerExtension
 
         if ($config['driver']) {
             // special way for combine driver
-            if ($config['driver']->getEntity() == CombineDriver::class) {
+            if ($config['driver'] == CombineDriver::class) {
                 foreach ($config['driver']->arguments[0] as $index => $argument) {
                     $builder->addDefinition($this->prefix('driver.' . $index))
                         ->setFactory($argument)
